@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
+
+            <!-- user info -->
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <app-user-info></app-user-info>
+                </div>
+            </div>
+
+            <!-- menu bar -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-menu></app-menu>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-10 mb-3">
+
+            <!-- breadcrumb -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <app-breadcrumb></app-breadcrumb>
+                </div>
+            </div>
+
+            <!-- statistics -->
+            <div class="row statistics-data">
+                <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let st_card of statisticsCards">
+                    <app-statistics-card [image]="st_card.image" [title]="st_card.title"
+                        [count]="st_card.count"></app-statistics-card>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <app-tabs></app-tabs>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

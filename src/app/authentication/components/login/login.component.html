@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Login</h1>
+
+            <div *ngIf="showError" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>
+
+            <form [formGroup]="loginForm" autocomplete="off" novalidate (ngSubmit)="loginUser(loginForm.value)">
+                <div class="mb-3 row">
+                    <label for="username" class="col-form-label col-sm-2">Username:</label>
+                    <div class="col-md-12">
+                        <input type="text" id="username" formControlName="username" class="form-control" />
+                        <em
+                            *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].invalid && loginForm.controls['username'].touched">Username
+                            is required</em>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-form-label col-sm-2">Password:</label>
+                    <div class="col-md-12">
+                        <input type="password" id="password" formControlName="password" class="form-control" />
+                        <em
+                            *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].invalid && loginForm.controls['password'].touched">Password
+                            is required</em>
+                    </div>
+                </div>
+                <br>
+                <div class="mb-3 row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-info" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
