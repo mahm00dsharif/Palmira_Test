@@ -11,13 +11,13 @@ import { AuthResponseDto } from "./models/authResponseDto.model";
 })
 export class AuthenticationService {
     private readonly envUrl = environment.apiUrl + '/login.php';
-    constructor(private jwtHelper: JwtHelperService,private http:HttpClient) {
+    constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {
 
     }
 
-    Login(body: AuthRequestDto):Observable<AuthResponseDto>{
+    Login(body: AuthRequestDto): Observable<AuthResponseDto> {
         console.log(this.envUrl)
-        return this.http.post<AuthResponseDto>(this.envUrl, body,{headers :{  "Access-Control-Allow-Origin":"http://194.163.169.47:5000"}});
+        return this.http.post<AuthResponseDto>(this.envUrl, body);
     }
 
     public getToken(): any {
@@ -26,8 +26,11 @@ export class AuthenticationService {
 
     IsLoggedIn$(): Observable<boolean> {
         const token = this.getToken();
+        if (token == null)
+            return of(false);
         // return a boolean reflecting 
         // whether or not the token is expired
-        return of(this.jwtHelper.isTokenExpired(null, token));
+        const tokenExpired = <boolean>this.jwtHelper.isTokenExpired(token);
+        return of(tokenExpired);
     }
 }
