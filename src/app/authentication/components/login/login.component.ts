@@ -43,8 +43,14 @@ export class LoginComponent implements OnInit {
     this.authService.Login(userForAuth)
       .subscribe({
         next: (res: AuthResponseDto) => {
+          if(res.data !=null && res.data.accessToken !=null){
           localStorage.setItem("access_token", res.data.accessToken);
-          this.router.navigate(['HierarchiesDetails']);
+          this.router.navigateByUrl('/HierarchiesDetails');
+          }else
+          {
+            this.errorMessage = 'wrong username or password';
+            this.showError = true;
+          }
         },
         error: (err: HttpErrorResponse) => {
           this.errorMessage = err.message;
